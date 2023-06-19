@@ -10,30 +10,30 @@ datasource db {
   url      = "postgresql://postgres:jose1918@localhost:5432/database-LDV?schema=public"
 }
 
-
 model Cliente {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  cpf       Int      @unique
-  telefone  Int      @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  name     String
+  cpf      Int    @unique
+  telefone Int    @unique
+  senha    String
 }
 
 model Proprietario {
-  nome    Int     @id @unique
-  email   String  @unique
-  senha   String  @unique
-  cpf     String  @unique
-  cnpj    Int     @unique 
-  telefone  Int   @unique
+  nome     Int    @id @unique
+  email    String @unique
+  senha    String @unique
+  cpf      String @unique
+  cnpj     Int    @unique
+  telefone Int    @unique
 }
 
 model Arena {
-id_arena    Int   @id @default(autoincrement())
-nome_arena        String
-endereco    String  @unique
-cnpj        Int    @unique 
-quant_quadras   Int
-modalidades   String
-telefone_arena  Int @unique
+  id_arena       Int    @id @default(autoincrement())
+  nome_arena     String
+  endereco       String @unique
+  cnpj           Int    @unique
+  quant_quadras  Int
+  modalidades    String
+  telefone_arena Int    @unique
 }

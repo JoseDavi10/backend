@@ -1,4 +1,4 @@
-const solic_bd = require("../../prisma")
+import {PrismaClient} from "@prisma/client";
 
 const prisma = new PrismaClient();
 

@@ -40,7 +40,7 @@ async function findAllClientes() {
     return clientes;
 }
 
-async function updateCliente(id, name, email, telefone, senha) {
+async function updateCliente(id, email, name, telefone, senha) {
 
     const cliente = await prisma.cliente.update({
         where: { id: Number(id) },

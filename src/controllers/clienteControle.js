@@ -2,10 +2,10 @@ const clienteService = require('../services/clienteservice');
 
 async function createCliente(req, res) {
     try {
-        const {name, email, cpf, telefone, senha} = req.body
+        const {email, name, cpf, telefone, senha} = req.body
         let cliente = await clienteService.findClienteByEmail(email);
 
-        if (cliente) {
+        if (!cliente) {
             return res.json({
                 success: false,
                 data: {},
@@ -27,6 +27,7 @@ async function createCliente(req, res) {
 }
 async function findAllClientes(req, res) {
     try {
+        const {email, name, cpf, telefone, senha} = req.body
         const clientes = await clienteService.findAllClientes();
         return res.json({
             success: true,
@@ -66,7 +67,7 @@ async function findCliente(req, res){
 async function updateCliente(req, res){
     try {
         const {id} = req.params;
-        const {name, email, telefone, senha} = req.body;
+        const {email, name, telefone, senha} = req.body;
 
         let cliente = await clienteService.updateCliente(id);
 
@@ -77,7 +78,7 @@ async function updateCliente(req, res){
                 message: "Could not update this cliente",
             });
         }
-        cliente = await clienteService.updateCliente(id, name, email, telefone, senha);
+        cliente = await clienteService.updateCliente(id, email, name, telefone, senha);
 
         return res.json({
             success: true,

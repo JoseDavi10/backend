@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:jose1918@localhost:5432/database-LDV?schema=public"
+  url      = "postgresql://postgres:jose918@localhost:5432/database-LDV?schema=public"
 }
 
 model Cliente {
@@ -20,20 +20,32 @@ model Cliente {
 }
 
 model Proprietario {
-  nome     Int    @id @unique
+  id       Int    @id @default(autoincrement())
+  nome     String    @unique
   email    String @unique
   senha    String @unique
   cpf      String @unique
-  cnpj     Int    @unique
   telefone Int    @unique
+  empresas Empresa[]
+
+}
+
+model Empresa {
+  id_empresa       Int    @id @default(autoincrement())
+  nome_empresa     String
+  endereco       String @unique
+  cnpj           Int    @unique
+  quant_arenas  Int
+  telefone_empresa Int    @unique
+  proprietario Proprietario @relation(fields: [proprietarioId], references: [id])
+  proprietarioId Int
+  arenas Arena[]
 }
 
 model Arena {
-  id_arena       Int    @id @default(autoincrement())
-  nome_arena     String
-  endereco       String @unique
-  cnpj           Int    @unique
-  quant_quadras  Int
+  id_arena       Int @id @default(autoincrement())
   modalidades    String
-  telefone_arena Int    @unique
+  empresa Empresa @relation(fields: [empresaId], references: [id_empresa])
+  empresaId Int
+  preco   Int
 }
